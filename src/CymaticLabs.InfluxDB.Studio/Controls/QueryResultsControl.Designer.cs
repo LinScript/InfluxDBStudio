@@ -33,13 +33,15 @@
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exportAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportAllCsvToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.jSONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportSelectedCsvToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.jSONToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.tagsTextBox = new System.Windows.Forms.TextBox();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.jSONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.jSONToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -57,7 +59,7 @@
             this.listView.HideSelection = false;
             this.listView.Location = new System.Drawing.Point(0, 0);
             this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(688, 429);
+            this.listView.Size = new System.Drawing.Size(688, 394);
             this.listView.TabIndex = 0;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
@@ -66,9 +68,11 @@
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportAllToolStripMenuItem,
-            this.exportSelectedToolStripMenuItem});
+            this.exportSelectedToolStripMenuItem,
+            this.copyToolStripMenuItem,
+            this.editToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(155, 70);
+            this.contextMenuStrip.Size = new System.Drawing.Size(181, 114);
             // 
             // exportAllToolStripMenuItem
             // 
@@ -76,15 +80,22 @@
             this.exportAllCsvToolStripMenuItem,
             this.jSONToolStripMenuItem});
             this.exportAllToolStripMenuItem.Name = "exportAllToolStripMenuItem";
-            this.exportAllToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.exportAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportAllToolStripMenuItem.Text = "Export All";
             // 
             // exportAllCsvToolStripMenuItem
             // 
             this.exportAllCsvToolStripMenuItem.Name = "exportAllCsvToolStripMenuItem";
-            this.exportAllCsvToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportAllCsvToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.exportAllCsvToolStripMenuItem.Text = "CSV";
             this.exportAllCsvToolStripMenuItem.Click += new System.EventHandler(this.exportAllCsvToolStripMenuItem_Click);
+            // 
+            // jSONToolStripMenuItem
+            // 
+            this.jSONToolStripMenuItem.Name = "jSONToolStripMenuItem";
+            this.jSONToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.jSONToolStripMenuItem.Text = "JSON";
+            this.jSONToolStripMenuItem.Click += new System.EventHandler(this.jSONToolStripMenuItem_Click);
             // 
             // exportSelectedToolStripMenuItem
             // 
@@ -92,15 +103,22 @@
             this.exportSelectedCsvToolStripMenuItem,
             this.jSONToolStripMenuItem1});
             this.exportSelectedToolStripMenuItem.Name = "exportSelectedToolStripMenuItem";
-            this.exportSelectedToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.exportSelectedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportSelectedToolStripMenuItem.Text = "Export Selected";
             // 
             // exportSelectedCsvToolStripMenuItem
             // 
             this.exportSelectedCsvToolStripMenuItem.Name = "exportSelectedCsvToolStripMenuItem";
-            this.exportSelectedCsvToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportSelectedCsvToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.exportSelectedCsvToolStripMenuItem.Text = "CSV";
             this.exportSelectedCsvToolStripMenuItem.Click += new System.EventHandler(this.exportSelectedCsvToolStripMenuItem_Click);
+            // 
+            // jSONToolStripMenuItem1
+            // 
+            this.jSONToolStripMenuItem1.Name = "jSONToolStripMenuItem1";
+            this.jSONToolStripMenuItem1.Size = new System.Drawing.Size(108, 22);
+            this.jSONToolStripMenuItem1.Text = "JSON";
+            this.jSONToolStripMenuItem1.Click += new System.EventHandler(this.jSONToolStripMenuItem1_Click);
             // 
             // splitContainer
             // 
@@ -116,7 +134,7 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.listView);
-            this.splitContainer.Size = new System.Drawing.Size(688, 458);
+            this.splitContainer.Size = new System.Drawing.Size(688, 423);
             this.splitContainer.SplitterDistance = 25;
             this.splitContainer.TabIndex = 4;
             // 
@@ -130,27 +148,27 @@
             this.tagsTextBox.Size = new System.Drawing.Size(688, 25);
             this.tagsTextBox.TabIndex = 1;
             // 
-            // jSONToolStripMenuItem
+            // copyToolStripMenuItem
             // 
-            this.jSONToolStripMenuItem.Name = "jSONToolStripMenuItem";
-            this.jSONToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.jSONToolStripMenuItem.Text = "JSON";
-            this.jSONToolStripMenuItem.Click += new System.EventHandler(this.jSONToolStripMenuItem_Click);
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
-            // jSONToolStripMenuItem1
+            // editToolStripMenuItem
             // 
-            this.jSONToolStripMenuItem1.Name = "jSONToolStripMenuItem1";
-            this.jSONToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.jSONToolStripMenuItem1.Text = "JSON";
-            this.jSONToolStripMenuItem1.Click += new System.EventHandler(this.jSONToolStripMenuItem1_Click);
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // QueryResultsControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainer);
             this.Name = "QueryResultsControl";
-            this.Size = new System.Drawing.Size(688, 458);
+            this.Size = new System.Drawing.Size(688, 423);
             this.contextMenuStrip.ResumeLayout(false);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel1.PerformLayout();
@@ -173,5 +191,7 @@
         private System.Windows.Forms.ToolStripMenuItem exportSelectedCsvToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem jSONToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem jSONToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
     }
 }

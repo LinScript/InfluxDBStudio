@@ -219,6 +219,12 @@
     <Compile Include="Controls\DiagnosticsControl.Designer.cs">
       <DependentUpon>DiagnosticsControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\EditVarDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\EditVarDialog.Designer.cs">
+      <DependentUpon>EditVarDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\RetentionPolicyDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -318,6 +324,7 @@
     <Compile Include="Dialogs\UserPasswordDialog.Designer.cs">
       <DependentUpon>UserPasswordDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Util\DateTimeUtil.cs" />
     <EmbeddedResource Include="AppForm.resx">
       <DependentUpon>AppForm.cs</DependentUpon>
     </EmbeddedResource>

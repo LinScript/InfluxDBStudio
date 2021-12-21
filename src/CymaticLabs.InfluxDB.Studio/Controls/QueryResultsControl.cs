@@ -6,12 +6,14 @@ using System.Windows.Forms;
 using System.IO;
 using Newtonsoft.Json;
 using CymaticLabs.InfluxDB.Data;
+using CymaticLabs.InfluxDB.Studio.Util;
+using CymaticLabs.InfluxDB.Studio.Dialogs;
 
 namespace CymaticLabs.InfluxDB.Studio.Controls
 {
-    /// <summary>
-    /// Renders the results for a single InfluxDB query.
-    /// </summary>
+/// <summary>
+/// Renders the results for a single InfluxDB query.
+/// </summary>
     public partial class QueryResultsControl : UserControl
     {
         #region Fields
@@ -90,6 +92,7 @@ namespace CymaticLabs.InfluxDB.Studio.Controls
             listView.Columns.Clear();
             listView.Items.Clear();
             listView.EndUpdate();
+            listView.Tag = null;
         }
 
         /// <summary>
@@ -106,6 +109,7 @@ namespace CymaticLabs.InfluxDB.Studio.Controls
 
             // Clear as needed
             if (clear) ClearResults();
+            listView.Tag = result;
 
             // Add tag values to to results
             if (result.Tags.Count > 0)
@@ -136,6 +140,11 @@ namespace CymaticLabs.InfluxDB.Studio.Controls
             listView.Columns.Add(colRecordNum);
 
             // Build the dynamic columns
+            if (result.Columns[0].Equals("time")) {
+                var col = new ColumnHeader();
+                col.Text = "time_unix";
+                listView.Columns.Add(col);
+            }
             foreach (var c in result.Columns)
             {
                 var col = new ColumnHeader();
@@ -155,12 +164,29 @@ namespace CymaticLabs.InfluxDB.Studio.Controls
 
                 for (var x = 0; x < r.Count; x++)
                 {
+               
                     // Get the value
                     var v = r[x];
 
+                    if (result.Columns[0].Equals("time") && x == 0)
+                    {
+                        string str = null;
+                        if (v is System.DateTime)
+                        {
+                            str = DateTimeUtil.UnixTime((DateTime)v).ToString();
+                        }
+                        else
+                        {
+                            str = v.ToString();
+                        }
+                        var liadd = new ListViewItem.ListViewSubItem(li, v != null ? str : null);
+                        liadd.Tag = r;
+                        li.SubItems.Add(liadd);
+                    }
+                    string vStr = v != null ? v is System.DateTime? ((DateTime)v).AddHours(8).ToString(): v.ToString() : null;
                     // Attach the column values as subitems
-                    var li2 = new ListViewItem.ListViewSubItem(li, v != null ? v.ToString() : null);
-                    li2.Tag = r;
+                    var li2 = new ListViewItem.ListViewSubItem(li, vStr);
+                    li.Tag = r;
                     li.SubItems.Add(li2);
                 }
             }
@@ -177,6 +203,7 @@ namespace CymaticLabs.InfluxDB.Studio.Controls
 
             return resultsCount;
         }
+
 
         // Exports series data to CSV
         async Task ExportToCsv(bool onlySelected = false)
@@ -303,5 +330,38 @@ namespace CymaticLabs.InfluxDB.Studio.Controls
         }
 
         #endregion Methods
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var items=this.listView.SelectedItems;
+            if (items.Count > 0) {
+                string result = "";
+                foreach (ListViewItem item in items) {
+                    foreach (ListViewItem.ListViewSubItem it in item.SubItems) {
+                        result+=it.Text + "\t";
+                    }
+                    result += "\n";
+                }
+                Clipboard.SetText(result);
+            }           
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var curRecoder=this.listView.SelectedItems[0].Tag as IList<Object>;
+            var results = (InfluxDbSeries)this.listView.Tag;
+            if (editVarDialog == null||editVarDialog.IsDisposed) {
+                editVarDialog = new EditVarDialog(this);
+            }            
+            editVarDialog.Show();
+            editVarDialog.RefreshDisplay(results, curRecoder);
+        }
+
+        public void writeData(IDictionary<string,object> tags,IDictionary<string,object> values,DateTime timestamp) {
+            this.InfluxDbClient.WriteAsync(this.Database, new InfluxDbPoint("iot_point_data", tags, values, timestamp));
+            MessageBox.Show("update success!");
+        }
+
+        public EditVarDialog editVarDialog;
     }
 }

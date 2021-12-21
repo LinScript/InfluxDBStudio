@@ -30,7 +30,16 @@ namespace CymaticLabs.InfluxDB.Studio.Controls
         /// </summary>
         public string EditorText
         {
-            get { return queryEditor.Text; }
+            get {
+                if (!string.IsNullOrWhiteSpace(queryEditor.SelectedText)) {
+                    return queryEditor.SelectedText;
+                }
+                else {
+                    return
+                   queryEditor.Text;
+                }
+               
+            }
             set { queryEditor.Text = value; }
         }
 
