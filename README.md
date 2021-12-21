@@ -1,4 +1,6 @@
-﻿# InfluxDB Studio
+﻿
+# InfluxDB Studio 添加自定义功能
+# InfluxDB Studio
 **InfluxDB Studio is a UI management tool for [the InfluxDB time series database](https://www.influxdata.com/time-series-platform/influxdb/).**
 
 Its inspiration comes from other similar database management tools such as [SQL Server Management Studio](https://en.wikipedia.org/wiki/SQL_Server_Management_Studio)
@@ -110,13 +112,13 @@ The following connection commands are available:
  * **Show Users** - Lists users on the server and provides a user management interface.
  * **Diagnostics** - Shows server diagnostics including runtime, version, uptime, etc.
  * **Disconnect** - Closes the connection and removes it from the active connection list.
- 
+
 ### Showing Server Diagnostics
 
 To show connection diagnostics **right-click** or use **the toolbar button** to select the **Show Diagnostics** command:
 
 ![Show Diagnostics](docs/img/Connections_Diagnostics_2.png?raw=true "Show Diagnostics")
- 
+
 ## Working with Databases
 
 The following commands are available from the Database **context menu** and **toolbar buttons**:
@@ -128,9 +130,9 @@ The following commands are available from the Database **context menu** and **to
   * **Drop Database** - Drops the current database from the server.
 
 ### Creating a Database 
- 
+
 To create a database, select the **Connection** where you would like to create the database and select **Create Database** from the **context menu** or **the toolbar button**. Next provide the name for the database to create and press the **Create** button:
- 
+
 ![Create Database](docs/img/Connections_CreateDatabase_1.png?raw=true "Create Database")
 
 The created database should now appear in the tree view on the left:
@@ -187,7 +189,7 @@ _Once you are satisified with your CQ press the **Create** button to create and 
 ![Continuous Query Created](docs/img/Databases_CQ_4.png?raw=true "Continuous Query Created")
 
 ### Running a Backfill Query
- 
+
 **Backfill Queries** are similar to **Continuous Queries** in that they are typically used to process or downsample data from one measurement into another.
 The difference is that where as **Continuous Queries** run in realtime at a fixed interval and process incoming data inside a user-specified rolling time window,
 **Backfill Queries** are typically only run once on older measurment data that is already stored in the database and outside of the CQ time window.
@@ -302,7 +304,7 @@ The following is a list of available commands when working with users and privil
   * **Drop User** - Drops a user from the InfluxDB server.
   * **Grant Privilege** - Grants a privilege (Read, Write, All) to a user for a particular database.
   * **Edit Privilege** - Updates a user's privilege for a particular database.
- 
+
 ### Showing Users
 
 Select a connection node in the tree view and either **right-click** or use **the toolbar button** and select **Show Users**:
@@ -376,7 +378,7 @@ _Select the desired privilege from the drop down and save. To revoke all privile
 Application settings can be adjusted in the application **Settings** menu. Settings and connection information can also be imported and exported.
 
 ### Settings Overview
-  
+
   * **Settings → Time Format**
     * **12 hour** - Time will be displayed in a 12 hour format with AM/PM.
 	* **24 hour** - Time will be displayed in a 24 hour format.
